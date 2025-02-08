@@ -1,5 +1,12 @@
 import mongoose, {model, Model,Schema} from 'mongoose'
-mongoose.connect('mongodb+srv://manavishav:29L9jbAQNF9X7IOO@ishav.slndu.mongodb.net/brain')
+import dotenv from 'dotenv';
+dotenv.config();
+
+const mongoDB = process.env.mongooseURL || '';
+if (!mongoDB) {
+    throw new Error('MongoDB connection string not found in environment variables');
+}
+mongoose.connect(mongoDB);
 
 const UserSchema = new Schema({
     username:{type:String, unique:true},
